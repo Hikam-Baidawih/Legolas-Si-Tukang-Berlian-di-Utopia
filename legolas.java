@@ -1,6 +1,7 @@
 import java.util.*;
 
 public class legolas {
+  
     static class Node {
         int kota;
         int aliansi;
@@ -33,4 +34,3 @@ public class legolas {
             } else if (c < 1 || c > 100) {
                 break;
             }
-}
