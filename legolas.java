@@ -114,5 +114,31 @@ public class legolas {
             }
 
             List<Integer> aliansiBerikutnya = aliansiKota.getOrDefault(kotaSekarang, new ArrayList<>());
-            for (int i = 0; i < aliansiBerikutnya.size(); i++) {
+            
+          for (int i = 0; i < aliansiBerikutnya.size(); i++) {
                 int nextAlliance = aliansiBerikutnya.get(i);
+                
+            if (nextAlliance != aliansiSekarang || aliansiBerikutnya.size() == 1) {
+                    String key = kotaSekarang + "-" + nextAlliance;
+                    List<String> tetangga = graph.getOrDefault(key, new ArrayList<>());
+                    
+              for (int j = 0; j < tetangga.size(); j++) {
+                        String sebelah = tetangga.get(j);
+                        int kotaTetangga = Integer.parseInt(sebelah.split("-")[0]);
+                        int aliansiTetangga = Integer.parseInt(sebelah.split("-")[1]);
+
+                        if (!visited.contains(kotaTetangga)) {
+                            Set<Integer> newVisited = new HashSet<>(visited);
+                            newVisited.add(kotaTetangga);
+                            int[] newPath = Arrays.copyOf(path, n);
+                            newPath[pathIndex] = kotaTetangga;
+                            queue.offer(new Node(kotaTetangga, aliansiTetangga, newVisited, newPath, pathIndex + 1));
+                        }
+                    }
+                }
+            }
+        }
+
+        return false;
+    }
+}
