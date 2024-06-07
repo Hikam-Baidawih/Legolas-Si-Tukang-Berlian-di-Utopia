@@ -93,3 +93,26 @@ public class legolas {
 
         return -1;
     }
+
+ private static boolean searching(int kotaAwal, int aliansiAwal, int n, Map<Integer, List<Integer>> aliansiKota, Map<String, List<String>> graph) {
+        Queue<Node> queue = new LinkedList<>();
+        int[] jalurAwal = new int[n];
+        jalurAwal[0] = kotaAwal;
+        queue.offer(
+                new Node(kotaAwal, aliansiAwal, new HashSet<>(Collections.singleton(kotaAwal)), jalurAwal, 1));
+
+        while (!queue.isEmpty()) {
+            Node node = queue.poll();
+            int kotaSekarang = node.kota;
+            int aliansiSekarang = node.aliansi;
+            Set<Integer> visited = node.visited;
+            int[] path = node.jalur;
+            int pathIndex = node.urutanJalur;
+
+            if (visited.size() == n) {
+                return true;
+            }
+
+            List<Integer> aliansiBerikutnya = aliansiKota.getOrDefault(kotaSekarang, new ArrayList<>());
+            for (int i = 0; i < aliansiBerikutnya.size(); i++) {
+                int nextAlliance = aliansiBerikutnya.get(i);
