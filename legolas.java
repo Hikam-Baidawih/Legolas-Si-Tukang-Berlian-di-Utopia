@@ -66,3 +66,30 @@ public class legolas {
                 aliansiKota.get(kota).add(aliansiIndex);
             }
         }
+
+    for (int aliansiIndex = 0; aliansiIndex < alliances.length; aliansiIndex++) {
+            int[] alliance = alliances[aliansiIndex];
+            for (int i = 0; i < alliance.length; i++) {
+                for (int j = i + 1; j < alliance.length; j++) {
+                    String key1 = alliance[i] + "-" + aliansiIndex;
+                    String key2 = alliance[j] + "-" + aliansiIndex;
+                    graph.putIfAbsent(key1, new ArrayList<>());
+                    graph.putIfAbsent(key2, new ArrayList<>());
+                    graph.get(key1).add(key2);
+                    graph.get(key2).add(key1);
+                }
+            }
+        }
+
+        for (int kota = 0; kota < n; kota++) {
+            List<Integer> aliansiSetiapkota = aliansiKota.getOrDefault(kota, new ArrayList<>());
+            for (int i = 0; i < aliansiSetiapkota.size(); i++) {
+                int alliance = aliansiSetiapkota.get(i);
+                if (searching(kota, alliance, n, aliansiKota, graph)) {
+                    return kota;
+                }
+            }
+        }
+
+        return -1;
+    }
