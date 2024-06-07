@@ -34,3 +34,22 @@ public class legolas {
             } else if (c < 1 || c > 100) {
                 break;
             }
+
+            int[][] alliances = new int[c][];
+            for (int i = 0; i < c; i++) {
+                int k = scanner.nextInt();
+                alliances[i] = new int[k];
+                for (int j = 0; j < k; j++) {
+                    alliances[i][j] = scanner.nextInt();
+                }
+            }
+
+            int result = tiketawaldankota(n, c, alliances);
+            results[resultIndex++] = result;
+        }
+
+        for (int i = 0; i < resultIndex; i++) {
+            System.out.println(results[i]);
+        }
+        scanner.close();
+    }
