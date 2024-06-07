@@ -53,3 +53,16 @@ public class legolas {
         }
         scanner.close();
     }
+  
+   private static int tiketawaldankota(int n, int c, int[][] alliances) {
+        Map<Integer, List<Integer>> aliansiKota = new HashMap<>();
+        Map<String, List<String>> graph = new HashMap<>();
+
+        for (int aliansiIndex = 0; aliansiIndex < alliances.length; aliansiIndex++) {
+            int[] alliance = alliances[aliansiIndex];
+            for (int i = 0; i < alliance.length; i++) {
+                int kota = alliance[i];
+                aliansiKota.putIfAbsent(kota, new ArrayList<>());
+                aliansiKota.get(kota).add(aliansiIndex);
+            }
+        }
