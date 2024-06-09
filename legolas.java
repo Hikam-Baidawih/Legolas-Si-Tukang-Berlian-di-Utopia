@@ -8,7 +8,7 @@ public class legolas {
         Set<Integer> visited;
         int[] jalur;
         int urutanJalur;
-        
+
         Node(int k, int a, Set<Integer> v, int[] j, int uj) {
             kota = k;
             aliansi = a;
@@ -53,8 +53,8 @@ public class legolas {
         }
         scanner.close();
     }
-  
-   private static int tiketawaldankota(int n, int c, int[][] alliances) {
+
+    private static int tiketawaldankota(int n, int c, int[][] alliances) {
         Map<Integer, List<Integer>> aliansiKota = new HashMap<>();
         Map<String, List<String>> graph = new HashMap<>();
 
@@ -67,7 +67,7 @@ public class legolas {
             }
         }
 
-    for (int aliansiIndex = 0; aliansiIndex < alliances.length; aliansiIndex++) {
+        for (int aliansiIndex = 0; aliansiIndex < alliances.length; aliansiIndex++) {
             int[] alliance = alliances[aliansiIndex];
             for (int i = 0; i < alliance.length; i++) {
                 for (int j = i + 1; j < alliance.length; j++) {
@@ -94,7 +94,8 @@ public class legolas {
         return -1;
     }
 
- private static boolean searching(int kotaAwal, int aliansiAwal, int n, Map<Integer, List<Integer>> aliansiKota, Map<String, List<String>> graph) {
+    private static boolean searching(int kotaAwal, int aliansiAwal, int n, Map<Integer, List<Integer>> aliansiKota,
+            Map<String, List<String>> graph) {
         Queue<Node> queue = new LinkedList<>();
         int[] jalurAwal = new int[n];
         jalurAwal[0] = kotaAwal;
@@ -114,15 +115,15 @@ public class legolas {
             }
 
             List<Integer> aliansiBerikutnya = aliansiKota.getOrDefault(kotaSekarang, new ArrayList<>());
-            
-          for (int i = 0; i < aliansiBerikutnya.size(); i++) {
+
+            for (int i = 0; i < aliansiBerikutnya.size(); i++) {
                 int nextAlliance = aliansiBerikutnya.get(i);
-                
-            if (nextAlliance != aliansiSekarang || aliansiBerikutnya.size() == 1) {
+
+                if (nextAlliance != aliansiSekarang || aliansiBerikutnya.size() == 1) {
                     String key = kotaSekarang + "-" + nextAlliance;
                     List<String> tetangga = graph.getOrDefault(key, new ArrayList<>());
-                    
-              for (int j = 0; j < tetangga.size(); j++) {
+
+                    for (int j = 0; j < tetangga.size(); j++) {
                         String sebelah = tetangga.get(j);
                         int kotaTetangga = Integer.parseInt(sebelah.split("-")[0]);
                         int aliansiTetangga = Integer.parseInt(sebelah.split("-")[1]);
@@ -142,4 +143,3 @@ public class legolas {
         return false;
     }
 }
-
