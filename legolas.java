@@ -58,6 +58,7 @@ public class legolas {
         Map<Integer, List<Integer>> aliansiKota = new HashMap<>();
         Map<String, List<String>> graph = new HashMap<>();
 
+        // Proses pembentukan peta
         for (int aliansiIndex = 0; aliansiIndex < alliances.length; aliansiIndex++) {
             int[] alliance = alliances[aliansiIndex];
             for (int i = 0; i < alliance.length; i++) {
@@ -67,6 +68,7 @@ public class legolas {
             }
         }
 
+        // membangun hubungan-hubungan antar kota
         for (int aliansiIndex = 0; aliansiIndex < alliances.length; aliansiIndex++) {
             int[] alliance = alliances[aliansiIndex];
             for (int i = 0; i < alliance.length; i++) {
@@ -94,13 +96,12 @@ public class legolas {
         return -1;
     }
 
-    private static boolean searching(int kotaAwal, int aliansiAwal, int n, Map<Integer, List<Integer>> aliansiKota,
-            Map<String, List<String>> graph) {
+    private static boolean searching(int kotaAwal, int aliansiAwal, int n, Map<Integer, List<Integer>> aliansiKota, Map<String, List<String>> graph) {
+        
         Queue<Node> queue = new LinkedList<>();
         int[] jalurAwal = new int[n];
         jalurAwal[0] = kotaAwal;
-        queue.offer(
-                new Node(kotaAwal, aliansiAwal, new HashSet<>(Collections.singleton(kotaAwal)), jalurAwal, 1));
+        queue.offer(new Node(kotaAwal, aliansiAwal, new HashSet<>(Collections.singleton(kotaAwal)), jalurAwal, 1));
 
         while (!queue.isEmpty()) {
             Node node = queue.poll();
@@ -130,7 +131,7 @@ public class legolas {
 
                         if (!visited.contains(kotaTetangga)) {
                             Set<Integer> newVisited = new HashSet<>(visited);
-                            newVisited.add(kotaTetangga);
+                            newVisited.add(kotaTetangga);   
                             int[] newPath = Arrays.copyOf(path, n);
                             newPath[pathIndex] = kotaTetangga;
                             queue.offer(new Node(kotaTetangga, aliansiTetangga, newVisited, newPath, pathIndex + 1));
